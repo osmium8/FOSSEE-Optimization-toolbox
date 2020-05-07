@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book [
+<!--Begin Entities-->
+<!ENTITY ad086670b7b7eeb078c4f4dcc172d1c7a SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/fgoalattain.xml">
+<!ENTITY ab50d1d942c3f3cc16d267e2f2eb37ba8 SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/fminbnd.xml">
+<!ENTITY a52b8d144d95cd0b00dee3b46498b5a3a SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/fmincon.xml">
+<!ENTITY a138e81ed16a7c44b0081096161fc9631 SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/fminimax.xml">
+<!ENTITY acb2f06176ff156493d59d42b2769e9d9 SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/fminunc.xml">
+<!ENTITY adb6b0645469e1efd615c93b665bc17d0 SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/fot_version.xml">
+<!ENTITY acc394f2e5d96414d354a0a0a9b2d6fdc SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/intfminbnd.xml">
+<!ENTITY a2c65557cc787e046049d227cac755c32 SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/intfmincon.xml">
+<!ENTITY aeb7f5bd3d820826bf1d91181864641a6 SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/intfminimax.xml">
+<!ENTITY afe762a92a7f6b15684d6d1a011992a23 SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/intfminunc.xml">
+<!ENTITY a58d17e008e4755a00913fae0a91d6f53 SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/intlinprog.xml">
+<!ENTITY a4f4f742692ffa563eaf9c0ff8c2135b0 SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/intquadprog.xml">
+<!ENTITY a1855274a445c58ab46d6ff9dd753623d SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/linprog.xml">
+<!ENTITY a28de40bbcfa8459746efa24300753f31 SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/lsqlin.xml">
+<!ENTITY a2e72f716ec54a03f72c3258c929f66e0 SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/lsqnonlin.xml">
+<!ENTITY a3e089e786a0e1baba3e6deb48992a1d6 SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/lsqnonneg.xml">
+<!ENTITY abc211a684a06809b8ce9ddb0c8cc04cb SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/quadprog.xml">
+<!ENTITY a2593879c566e714b985f776f42947c4b SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/quadprogCLP.xml">
+<!ENTITY aa62ccda18b51ad6a91953bfca8589078 SYSTEM "/home/rupak19/FOT-official-cleanup/check1/FOSSEE-Optimization-toolbox/help/en_US/quadprogmat.xml">
+<!--End Entities-->
+]>
+<book version="5.0-subset Scilab" xml:lang="en_US"
+      xmlns="http://docbook.org/ns/docbook"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:mml="http://www.w3.org/1998/Math/MathML"
+      xmlns:html="http://www.w3.org/1999/xhtml"
+      xmlns:db="http://docbook.org/ns/docbook">
+  <info xml:id='fossee_optimization_toolbox_manual'>
+    <title>FOSSEE_Optimization_Toolbox</title>
+  </info>
+
+<part xml:id='section_3fca9694ff4dbc2e0d3d472f65942ab7'>
+<title>FOSSEE_Optimization_Toolbox</title>
+&ad086670b7b7eeb078c4f4dcc172d1c7a;
+&ab50d1d942c3f3cc16d267e2f2eb37ba8;
+&a52b8d144d95cd0b00dee3b46498b5a3a;
+&a138e81ed16a7c44b0081096161fc9631;
+&acb2f06176ff156493d59d42b2769e9d9;
+&adb6b0645469e1efd615c93b665bc17d0;
+&acc394f2e5d96414d354a0a0a9b2d6fdc;
+&a2c65557cc787e046049d227cac755c32;
+&aeb7f5bd3d820826bf1d91181864641a6;
+&afe762a92a7f6b15684d6d1a011992a23;
+&a58d17e008e4755a00913fae0a91d6f53;
+&a4f4f742692ffa563eaf9c0ff8c2135b0;
+&a1855274a445c58ab46d6ff9dd753623d;
+&a28de40bbcfa8459746efa24300753f31;
+&a2e72f716ec54a03f72c3258c929f66e0;
+&a3e089e786a0e1baba3e6deb48992a1d6;
+&abc211a684a06809b8ce9ddb0c8cc04cb;
+&a2593879c566e714b985f776f42947c4b;
+&aa62ccda18b51ad6a91953bfca8589078;
+</part>
+</book>
