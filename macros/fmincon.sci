@@ -281,11 +281,11 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fmincon (varargin
    	end
 	if (rhs==5) then
         param=varargin(5);
-        Checktype("fmincon", param, "options", 5, "st");
+        fot_Checktype("fmincon", param, "options", 5, "st");
    	end
 	if (rhs==7) then
         param=varargin(7);
-        Checktype("fmincon", param, "options", 7, "st");
+        fot_Checktype("fmincon", param, "options", 7, "st");
    	end
  
 	//Storing the Input Parameters  
@@ -312,7 +312,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fmincon (varargin
    	if (rhs>8) then
        if(type(varargin(9))==17)
            param    = varargin(9);
-           Checktype("fmincon", param, "options", 9, "st");
+           fot_Checktype("fmincon", param, "options", 9, "st");
         else
            nlc      = varargin(9);
        end
@@ -327,10 +327,10 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fmincon (varargin
 
 	
 	//To check whether the 1st Input argument (fun) is a function or not
-    Checktype("fmincon", fun, "f", 1, "function");
+    fot_Checktype("fmincon", fun, "f", 1, "function");
    
 	//To check whether the 2nd Input argument (x0) is a vector/scalar
-  	Checktype("fmincon", x0, "x0", 2, "constant");
+  	fot_Checktype("fmincon", x0, "x0", 2, "constant");
   	
   	//To check and convert the 2nd Input argument (x0) to a row vector 
    	if((size(x0,1)~=1) & (size(x0,2)~=1)) then
@@ -370,7 +370,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fmincon (varargin
 	endfunction
    	
   	//To check whether the 3rd Input argument (A) is a Matrix/Vector
-  	Checktype("fmincon", A, "A", 3, "constant");
+  	fot_Checktype("fmincon", A, "A", 3, "constant");
 
 	//To check for correct size of A(3rd paramter)
    	if(size(A,2)~=s(2) & size(A,2)~=0) then
@@ -381,7 +381,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fmincon (varargin
    	s1=size(A);
    	
 	//To check whether the 4th Input argument (b) is a vector/scalar
-  	Checktype("fmincon", b, "b", 4, "constant");
+  	fot_Checktype("fmincon", b, "b", 4, "constant");
   	
   	//To check for the correct size of b (4th paramter) and convert it into a column vector which is required for Ipopt
     if(s1(2)==0) then
@@ -407,7 +407,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fmincon (varargin
    	end
   	
   	//To check whether the 5th Input argument (Aeq) is a matrix/vector
-  	Checktype("fmincon", Aeq, "Aeq", 5, "constant");
+  	fot_Checktype("fmincon", Aeq, "Aeq", 5, "constant");
   	
   	//To check for the correct size of Aeq (5th paramter)
    	if(size(Aeq,2)~=s(2) & size(Aeq,2)~=0) then
@@ -418,7 +418,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fmincon (varargin
    	s2=size(Aeq);
 
 	//To check whether the 6th Input argument(beq) is a vector/scalar
-	Checktype("fmincon", beq, "beq", 6, "constant");
+	fot_Checktype("fmincon", beq, "beq", 6, "constant");
   	
   	//To check for the correct size of beq(6th paramter) and convert it into a column vector which is required for Ipopt
     if(s2(2)==0) then
@@ -445,7 +445,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fmincon (varargin
    	
   	
   	//To check whether the 7th Input argument (lb) is a vector/scalar
-	Checktype("fmincon", lb, "lb", 7, "constant");
+	fot_Checktype("fmincon", lb, "lb", 7, "constant");
   	
   	//To check for the correct size and data of lb (7th paramter) and convert it into a column vector as required by Ipopt
    	if (size(lb,2)==0) then
@@ -468,7 +468,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fmincon (varargin
    	end 
    	
    	//To check whether the 8th Input argument (ub) is a vector/scalar
-   	Checktype("fmincon", ub, "ub", 8, "constant");
+   	fot_Checktype("fmincon", ub, "ub", 8, "constant");
    	
    	//To check for the correct size and data of ub (8th paramter) and convert it into a column vector as required by Ipopt
     if (size(ub,2)==0) then
@@ -578,7 +578,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fmincon (varargin
     end
    	
 //If options has been entered, then check its type for 'list'   
-   Checktype("fmincon", param, "options", 10, "st");
+   fot_Checktype("fmincon", param, "options", 10, "st");
 
    	//To set default values for options, if user doesn't enter options
 	options = list("MaxIter", [3000], "CpuTime", [600] );
@@ -660,7 +660,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fmincon (varargin
 	
    //To check for correct input of Objective Gradient function from the user	     	
    if (flag1==1) then
-   		Checktype("fmincon", fGrad, "fGrad", 10, "function");
+   		fot_Checktype("fmincon", fGrad, "fGrad", 10, "function");
    		
    		if(execstr('sample_fGrad=fGrad(x0)','errcatch')==21)
 			errmsg = msprintf(gettext("%s: Gradient function of Objective and x0 did not match "), "fmincon");
@@ -679,7 +679,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fmincon (varargin
    
    //To check for correct input of Lagrangian Hessian function from the user
    if (flag2==1) then
-   		Checktype("fmincon", lHess, "lHess", 10, "function");
+   		fot_Checktype("fmincon", lHess, "lHess", 10, "function");
    		
    		if(execstr('sample_lHess=lHess(x0,1,1:no_nlc)','errcatch')==21)
 			errmsg = msprintf(gettext("%s: Hessian function of Objective and x0 did not match "), "fmincon");
@@ -694,7 +694,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fmincon (varargin
    	
    	//To check for correct input of Constraint Gradient function from the user
    	if (flag3==1) then
-   		Checktype("fmincon", cGrad, "cGrad", 10, "function");
+   		fot_Checktype("fmincon", cGrad, "cGrad", 10, "function");
    		
    		if(execstr('[sample_cGrad,sample_ceqg]=cGrad(x0)','errcatch')==21)
 			errmsg = msprintf(gettext("%s: Gradient function of Constraint and x0 did not match "), "fmincon");
