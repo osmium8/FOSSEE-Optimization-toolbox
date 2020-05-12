@@ -398,6 +398,7 @@ if getos()=="Windows" then
              lib_base_dir+"liblapack.dll";
              lib_base_dir+"libblas.dll";
                     ]
+		Linker_Flag="";
     
     // [+lib_base_dir+"pthreadVC2.lib" ]
 
@@ -406,24 +407,24 @@ elseif getos()=="Darwin" then
     	lib_base_dir = third_dir + filesep() + 'Mac' + filesep() + 'lib' + filesep() + Version + filesep();
     	inc_base_dir = third_dir + filesep() + 'Mac' + filesep() + 'include' + filesep() + 'coin';
     	C_Flags=["-D__USE_DEPRECATED_STACK_FUNCTIONS__ -w -fpermissive -I"+path_builder+" -I"+inc_base_dir+" -Wl,-rpath "+lib_base_dir+" "]
-    	libs = ["-L"+lib_base_dir+"libSym"+" "+"-L"+lib_base_dir+"libipopt"+" "+"-L"+lib_base_dir+"libClp"+" "+"-L"+lib_base_dir+"libOsiClp"+" "+"-L"+lib_base_dir+"libCoinUtils" + " "+"-L"+lib_base_dir+"libbonmin"]
+    	Linker_Flag = ["-L"+lib_base_dir+"libSym"+" "+"-L"+lib_base_dir+"libipopt"+" "+"-L"+lib_base_dir+"libClp"+" "+"-L"+lib_base_dir+"libOsiClp"+" "+"-L"+lib_base_dir+"libCoinUtils" + " "+"-L"+lib_base_dir+"libbonmin"]
 
-
+		libs=[];
 else
     third_dir = path_builder+filesep()+'..'+filesep()+'..'+filesep()+'thirdparty';
     lib_base_dir = third_dir + filesep() + 'linux' + filesep() + 'lib' + filesep();
     inc_base_dir = third_dir + filesep() + 'linux' + filesep() + 'include' + filesep() + 'coin-or';
     
-    C_Flags=["-D__USE_DEPRECATED_STACK_FUNCTIONS__ -w -fpermissive -I"+path_builder+" -I"+inc_base_dir+" -Wl,-rpath="+lib_base_dir+" "+"-std=gnu++11"+" -fno-zero-initialized-in-bss"]
+    C_Flags=["-D__USE_DEPRECATED_STACK_FUNCTIONS__ -w -fpermissive -I"+path_builder+" -I"+inc_base_dir+" -Wl,-rpath="+lib_base_dir+" "+"-std=gnu++11"]
     
-    libs = ["-L"+lib_base_dir+"libipopt"+" "+"-L"+lib_base_dir+"libClp"+" "+"-L"+lib_base_dir+"libOsiClp"+" "+"-L"+lib_base_dir+"libCoinUtils" ]
-libs=[]
+    Linker_Flag = ["-L"+lib_base_dir+"libipopt"+" "+"-L"+lib_base_dir+"libClp"+" "+"-L"+lib_base_dir+"libOsiClp"+" "+"-L"+lib_base_dir+"libCoinUtils" ]
+libs=[];
     
 end
 
 disp("lib_base_dir = "+lib_base_dir)
-tbx_build_gateway(toolbox_title,Function_Names,Files,get_absolute_file_path("builder_gateway_cpp.sce"), libs, "", C_Flags);
-""
+tbx_build_gateway(toolbox_title,Function_Names,Files,get_absolute_file_path("builder_gateway_cpp.sce"), libs, Linker_Flag, C_Flags);
+
 clear toolbox_title Function_Names Files Linker_Flag C_Flags;
 
 //function tbx_build_gateway(libname,      ..
