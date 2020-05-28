@@ -17,14 +17,14 @@ function [xopt,fopt,exitflag,output,lambda] =mps_linprog(varargin)
 	
 	//To check the number of argument given by user
    	if ( rhs < 1 | rhs > 2) then
-		errmsg = msprintf(gettext("%s: Unexpected number of input arguments : %d provided while should be in the set of [1 2]"),"linprog",rhs);
+		errmsg = msprintf(gettext("%s: Unexpected number of input arguments : %d provided while should be in the set of [1 2]"),"fot_linprog",rhs);
 		error(errmsg)
    	end
    	mpsFile = varargin(1);
 
 	[sizeFile isFile] = fileinfo(mpsFile);
 	if(isFile ~= 0) then
-		errmsg = msprintf(gettext("%s: File is not present at the given location"),"linprog",rhs);
+		errmsg = msprintf(gettext("%s: File is not present at the given location"),"fot_linprog",rhs);
 		error(errmsg)
 	end
 
@@ -35,15 +35,15 @@ function [xopt,fopt,exitflag,output,lambda] =mps_linprog(varargin)
    end 
 
    if (type(param) ~= 15) then
-      errmsg = msprintf(gettext("%s: options should be a list "), "linprog");
+      errmsg = msprintf(gettext("%s: options should be a list "), "fot_linprog");
       error(errmsg);
    end
 
 	//Check type of variables
-	fot_Checktype("linprog", mpsFile, "mpsFile", 1, "string")
+	fot_Checktype("fot_linprog", mpsFile, "mpsFile", 1, "string")
 
    if (modulo(size(param),2)) then
-   errmsg = msprintf(gettext("%s: Size of parameters should be even"), "linprog");
+   errmsg = msprintf(gettext("%s: Size of parameters should be even"), "fot_linprog");
    error(errmsg);
    end
    options = list("MaxIter"     , [3000],);
@@ -53,7 +53,7 @@ function [xopt,fopt,exitflag,output,lambda] =mps_linprog(varargin)
             case "maxiter" then
         		options(2*i) = param(2*i);
         	else
-			  errmsg = msprintf(gettext("%s: Unrecognized parameter name ''%s''."), "linprog", param(2*i-1));
+			  errmsg = msprintf(gettext("%s: Unrecognized parameter name ''%s''."), "fot_linprog", param(2*i-1));
 			  error(errmsg)
 		end		
    end

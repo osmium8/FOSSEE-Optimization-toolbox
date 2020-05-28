@@ -6,7 +6,7 @@ function errmsg = fot_Checktype ( funname , var , varname , ivar , expectedtype 
   // Generates an error if the given variable is not of expected type.
   //
   // Calling Sequence
-  //   errmsg = Checktype ( funname , var , varname , ivar , expectedtype )
+  //   errmsg = fot_Checktype ( funname , var , varname , ivar , expectedtype )
   //
   // Parameters
   //   funname : a 1 x 1 matrix of strings, the name of the calling function.
@@ -26,7 +26,7 @@ function errmsg = fot_Checktype ( funname , var , varname , ivar , expectedtype 
   // Examples
   // // The function takes a string argument.
   // function myfunction ( x )
-  //   Checktype ( "myfunction" , x , "x" , 1 , "string" )
+  //   fot_Checktype ( "myfunction" , x , "x" , 1 , "string" )
   //   disp("This is a string")
   // endfunction
   // // Calling sequences which work
@@ -36,7 +36,7 @@ function errmsg = fot_Checktype ( funname , var , varname , ivar , expectedtype 
   //
   // // The function takes a string or a matrix of doubles argument.
   // function myfunction ( x )
-  //   Checktype ( "myfunction" , x , "x" , 1 , [ "string" "constant" ] )
+  //   fot_Checktype ( "myfunction" , x , "x" , 1 , [ "string" "constant" ] )
   //   if ( typeof(x) == "string" ) then
   //     disp("This is a matrix of strings")
   //   else
