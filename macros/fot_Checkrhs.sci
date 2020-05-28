@@ -6,7 +6,7 @@ function errmsg = fot_Checkrhs ( funname , rhs , rhsset )
   // Generates an error if the number of RHS is not in given set.
   //
   // Calling Sequence
-  //   errmsg = Checkrhs ( funname , rhs , rhsset )
+  //   errmsg = fot_Checkrhs ( funname , rhs , rhsset )
   //
   // Parameters
   //   funname : a 1 x 1 matrix of strings, the name of the calling function.
@@ -26,7 +26,7 @@ function errmsg = fot_Checkrhs ( funname , rhs , rhsset )
   // // The function takes 2/3 input arguments and 1 output arguments
   // function y = myfunction ( varargin )
   //   [lhs, rhs] = argn()
-  //   Checkrhs ( "myfunction" , rhs , 2:3 )
+  //   fot_Checkrhs ( "myfunction" , rhs , 2:3 )
   //   Checklhs ( "myfunction" , lhs , 1 )
   //   x1 = varargin(1)
   //   x2 = varargin(2)
@@ -47,7 +47,7 @@ function errmsg = fot_Checkrhs ( funname , rhs , rhsset )
   // // The function takes 2 or 4 input arguments, but not 3
   // function y = myfunction ( varargin )
   //   [lhs, rhs] = argn()
-  //   Checkrhs ( "myfunction" , rhs , [2 4] )
+  //   fot_Checkrhs ( "myfunction" , rhs , [2 4] )
   //   Checklhs ( "myfunction" , lhs , 1 )
   //   x1 = varargin(1)
   //   x2 = varargin(2)
@@ -69,14 +69,14 @@ function errmsg = fot_Checkrhs ( funname , rhs , rhsset )
   // y = myfunction ( 1 , 2 , 3 , 4, 5 )
   //
   // // The function takes 2 input arguments and 0/1 output arguments.
-  // // Notice that if the checkrhs function is not called,
+  // // Notice that if the fot_Checkrhs function is not called,
   // // the variable x2 might be used from the user's context,
   // // that is, if the caller has defined the variable x2, it 
   // // is used in the callee.
   // // Here, we want to avoid this.
   // function y = myfunction ( x1 , x2 )
   //   [lhs, rhs] = argn()
-  //   Checkrhs ( "myfunction" , rhs , 2 )
+  //   fot_Checkrhs ( "myfunction" , rhs , 2 )
   //   Checklhs ( "myfunction" , lhs , [0 1] )
   //   y = x1 + x2
   // endfunction

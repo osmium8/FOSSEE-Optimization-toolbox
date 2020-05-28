@@ -7,7 +7,7 @@ function errmsg = fot_Checkdims ( funname , var , varname , ivar , matdims )
   // Generates an error if the variable has not the required size.
   //
   // Calling Sequence
-  //   errmsg = Checkdims ( funname , var , varname , ivar , matdims )
+  //   errmsg = fot_Checkdims ( funname , var , varname , ivar , matdims )
   //
   // Parameters
   //   funname : a 1 x 1 matrix of strings, the name of the calling function.
@@ -28,7 +28,7 @@ function errmsg = fot_Checkdims ( funname , var , varname , ivar , matdims )
   // Examples
   // // The function takes a 2 x 3 matrix of doubles.
   // function y = myfunction ( x )
-  //   Checkdims ( "myfunction" , x , "x" , 1 , [2 3] )
+  //   fot_Checkdims ( "myfunction" , x , "x" , 1 , [2 3] )
   //   y = x
   // endfunction
   // // Calling sequences which work

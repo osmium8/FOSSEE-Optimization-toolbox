@@ -6,7 +6,7 @@ function errmsg = fot_Checklhs ( funname , lhs , lhsset )
   // Generates an error if the number of LHS is not in given set.
   //
   // Calling Sequence
-  //   errmsg = Checklhs ( funname , lhs , lhsset )
+  //   errmsg = fot_Checklhs ( funname , lhs , lhsset )
   //
   // Parameters
   //   funname : a 1 x 1 matrix of strings, the name of the calling function.
@@ -27,7 +27,7 @@ function errmsg = fot_Checklhs ( funname , lhs , lhsset )
   // function varargout = myfunction ( x1 , x2 , x3 )
   //   [lhs, rhs] = argn()
   //   Checkrhs ( "myfunction" , rhs , 3 : 3 )
-  //   Checklhs ( "myfunction" , lhs , 1 : 2 )
+  //   fot_Checklhs ( "myfunction" , lhs , 1 : 2 )
   //   y1 = x1 + x2
   //   y2 = x2 + x3
   //   varargout(1) = y1
@@ -46,7 +46,7 @@ function errmsg = fot_Checklhs ( funname , lhs , lhsset )
   // function varargout = myfunction ( x1 , x2 , x3 )
   //   [lhs, rhs] = argn()
   //   Checkrhs ( "myfunction" , rhs , 3 : 3 )
-  //   Checklhs ( "myfunction" , lhs , [1 3] )
+  //   fot_Checklhs ( "myfunction" , lhs , [1 3] )
   //   y1 = x1 + x2
   //   y2 = x2 + x3
   //   y3 = x1 + x3

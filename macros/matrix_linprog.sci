@@ -24,19 +24,19 @@ function [xopt,fopt,exitflag,output,lambda] = matrix_linprog (varargin)
 
 //To check the number of argument given by user
    if ( rhs < 3 | rhs == 4 | rhs == 6 | rhs >8 ) then
-    errmsg = msprintf(gettext("%s: Unexpected number of input arguments : %d provided while should be in the set of [3 5 7 8]"), "linprog", rhs);
+    errmsg = msprintf(gettext("%s: Unexpected number of input arguments : %d provided while should be in the set of [3 5 7 8]"), "fot_linprog", rhs);
     error(errmsg)
    end
    
    c = varargin(1);
 
 	if(size(c,2) == 0) then
-		errmsg = msprintf(gettext("%s: Cannot determine the number of variables because input objective coefficients is empty"), "linprog");
+		errmsg = msprintf(gettext("%s: Cannot determine the number of variables because input objective coefficients is empty"), "fot_linprog");
 		error(errmsg);
 	end
 
    if (size(c,2)~=1) then
-	errmsg = msprintf(gettext("%s: Objective Coefficients should be a column matrix"), "linprog");
+	errmsg = msprintf(gettext("%s: Objective Coefficients should be a column matrix"), "fot_linprog");
 	error(errmsg);
    end
 
@@ -67,13 +67,13 @@ function [xopt,fopt,exitflag,output,lambda] = matrix_linprog (varargin)
    	end
 
 	//Check type of variables
-	fot_Checktype("linprog", c, "c", 1, "constant")
-	fot_Checktype("linprog", A, "A", 2, "constant")
-	fot_Checktype("linprog", b, "b", 3, "constant")
-	fot_Checktype("linprog", Aeq, "Aeq", 4, "constant")
-	fot_Checktype("linprog", beq, "beq", 5, "constant")
-	fot_Checktype("linprog", lb, "lb", 6, "constant")
-	fot_Checktype("linprog", ub, "ub", 7, "constant")
+	fot_Checktype("fot_linprog", c, "c", 1, "constant")
+	fot_Checktype("fot_linprog", A, "A", 2, "constant")
+	fot_Checktype("fot_linprog", b, "b", 3, "constant")
+	fot_Checktype("fot_linprog", Aeq, "Aeq", 4, "constant")
+	fot_Checktype("fot_linprog", beq, "beq", 5, "constant")
+	fot_Checktype("fot_linprog", lb, "lb", 6, "constant")
+	fot_Checktype("fot_linprog", ub, "ub", 7, "constant")
 
    nbConInEq = size(A,1);
    nbConEq = size(Aeq,1);
@@ -92,13 +92,13 @@ function [xopt,fopt,exitflag,output,lambda] = matrix_linprog (varargin)
     end
 
     if (type(param) ~= 15) then
-      errmsg = msprintf(gettext("%s: options should be a list "), "linprog");
+      errmsg = msprintf(gettext("%s: options should be a list "), "fot_linprog");
       error(errmsg);
     end
    
 
    if (modulo(size(param),2)) then
-   errmsg = msprintf(gettext("%s: Size of parameters should be even"), "linprog");
+   errmsg = msprintf(gettext("%s: Size of parameters should be even"), "fot_linprog");
    error(errmsg);
    end
 
@@ -110,81 +110,81 @@ function [xopt,fopt,exitflag,output,lambda] = matrix_linprog (varargin)
     	case "maxiter" then
        		options(2*i) = param(2*i);
 		else
-			  errmsg = msprintf(gettext("%s: Unrecognized parameter name ''%s''."), "linprog", param(2*i-1));
+			  errmsg = msprintf(gettext("%s: Unrecognized parameter name ''%s''."), "fot_linprog", param(2*i-1));
 			  error(errmsg)
 		end
      end
 
    //Check the size of inequality constraint which should be equal to the number of variables
    if ( size(A,2) ~= nbVar & size(A,2) ~= 0) then
-      errmsg = msprintf(gettext("%s: The number of columns in A must be the same as the number of elements of c"), "linprog");
+      errmsg = msprintf(gettext("%s: The number of columns in A must be the same as the number of elements of c"), "fot_linprog");
       error(errmsg);
    end
 
    //Check the size of equality constraint which should be equal to the number of variables
    if ( size(Aeq,2) ~= nbVar & size(Aeq,2) ~= 0 ) then
-      errmsg = msprintf(gettext("%s: The number of columns in Aeq must be the same as the number of elements of c"), "linprog");
+      errmsg = msprintf(gettext("%s: The number of columns in Aeq must be the same as the number of elements of c"), "fot_linprog");
       error(errmsg);
    end
 	
    //Check the size of Lower Bound which should be equal to the number of variables
    if ( size(lb,1) ~= nbVar) then
-      errmsg = msprintf(gettext("%s: The Lower Bound is not equal to the number of variables"), "linprog");
+      errmsg = msprintf(gettext("%s: The Lower Bound is not equal to the number of variables"), "fot_linprog");
       error(errmsg);
    end
 
    //Check the size of Upper Bound which should equal to the number of variables
    if ( size(ub,1) ~= nbVar) then
-      errmsg = msprintf(gettext("%s: The Upper Bound is not equal to the number of variables"), "linprog");
+      errmsg = msprintf(gettext("%s: The Upper Bound is not equal to the number of variables"), "fot_linprog");
       error(errmsg);
    end
    //Check the size of constraints of Lower Bound which should equal to the number of constraints
    if ( size(b,1) ~= nbConInEq & size(b,2) ~= 0) then
-      errmsg = msprintf(gettext("%s: The number of rows in A must be the same as the number of elements of b"), "linprog");
+      errmsg = msprintf(gettext("%s: The number of rows in A must be the same as the number of elements of b"), "fot_linprog");
       error(errmsg);
    end
 
    //Check the size of constraints of Upper Bound which should equal to the number of constraints
    if ( size(beq,1) ~= nbConEq & size(beq,2) ~= 0) then
-      errmsg = msprintf(gettext("%s: The number of rows in Aeq must be the same as the number of elements of beq"), "linprog");
+      errmsg = msprintf(gettext("%s: The number of rows in Aeq must be the same as the number of elements of beq"), "fot_linprog");
       error(errmsg);
    end
 
    //Check if the user gives a matrix instead of a vector
    if (size(lb,1)~=1)& (size(lb,2)~=1) then
-      errmsg = msprintf(gettext("%s: Lower Bound should be a vector"), "linprog");
+      errmsg = msprintf(gettext("%s: Lower Bound should be a vector"), "fot_linprog");
       error(errmsg); 
    end
    
    if (size(ub,1)~=1)& (size(ub,2)~=1) then
-      errmsg = msprintf(gettext("%s: Upper Bound should be a vector"), "linprog");
+      errmsg = msprintf(gettext("%s: Upper Bound should be a vector"), "fot_linprog");
       error(errmsg); 
    end
    
    if (nbConInEq) then
         if ((size(b,1)~=1)& (size(b,2)~=1)) then
-            errmsg = msprintf(gettext("%s: Constraint Lower Bound should be a vector"), "linprog");
+            errmsg = msprintf(gettext("%s: Constraint Lower Bound should be a vector"), "fot_linprog");
             error(errmsg); 
         end
     end
     
     if (nbConEq) then
         if (size(beq,1)~=1)& (size(beq,2)~=1) then
-            errmsg = msprintf(gettext("%s: Constraint should be a vector"), "linprog");
+            errmsg = msprintf(gettext("%s: Constraint should be a vector"), "fot_linprog");
             error(errmsg); 
         end
    end
   
 	for i = 1:nbConInEq
 		if (b(i) == -%inf)
-		   	errmsg = msprintf(gettext("%s: Value of b can not be negative infinity"), "linprog");
+		   	errmsg = msprintf(gettext("%s: Value of b can not be negative infinity"), "fot_linprog");
             error(errmsg); 
         end	
 	end
     
 	for i = 1:nbConEq
 		if (beq(i) == -%inf)
-		   	errmsg = msprintf(gettext("%s: Value of beq can not be negative infinity"), "linprog");
+		   	errmsg = msprintf(gettext("%s: Value of beq can not be negative infinity"), "fot_linprog");
             error(errmsg); 
         end	
 	end

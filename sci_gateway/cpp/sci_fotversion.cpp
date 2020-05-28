@@ -30,7 +30,7 @@ int sci_fotversion(scilabEnv env, int nin, scilabVar* in, int nopt, scilabOpt op
         	return STATUS_ERROR; 
 	}
 	
-	if (nout !=1) //Checking the output arguments
+	if (nout !=0) //Checking the output arguments
 
 	{
 		Scierror(999, "%s: Wrong number of output argument(s): %d expected.\n", fname, 1);
