@@ -1,4 +1,4 @@
-# FOSSEE Optimization Toolbox for Scilab 6.0.x
+# FOSSEE Optimization Toolbox for Scilab 6.0.x and above
 
 A toolbox that provides mixed-integer programming, quadratic programming and nonlinear programming tools in Scilab through various open-source libraries available from Coin-OR.
 
@@ -19,11 +19,12 @@ NOTE: On linux systems with gfortran8 as the default version, the user will need
 5. To run a demo type `exec <name of function>.dem.sce`
 6. Test cases are available in `tests folder`.
 
-## To build
-1. If you have updated the source code, you need to build it again to see the changes.
-2. To build it first unlink the toolbox by executing the command `ulink`.
-3. Then type `exec builder.sce` to run the builder. {Prerequisites: In windows you need Visual Studio}
-4. Now run `exec loader.sce` in the scilab console. The toolbox will be ready
+## To build from source
+1. The source code has the `thirdparty` folder missing. This folder contains the pre-built optimization libraries for windows and linux
+2. Download the `thirdparty` folder for your OS from https://scilab.in/fossee-scilab-toolbox/optimization-toolbox/download-pre-built-optimization-library and paste it in the toolbox directory
+3. Then type `exec builder.sce` in the scilab console to run the builder. {Prerequisites: In windows you need MinGW installed along with its toolbox. See https://atoms.scilab.org/toolboxes/mingw/8.3.0 and Step 0,1,2 of https://github.com/FOSSEE/FOSSEE-Optimization-toolbox/blob/Scilab-6/doc/INSTALL.mingw}
+4. If you are using Windows, after you build the toolbox successfully, follow instructions given in https://github.com/FOSSEE/FOSSEE-Optimization-toolbox/blob/Scilab-6/doc/windows.edits
+5. Now run `exec loader.sce` in the scilab console. The toolbox will be ready
    to use.
 
    This toolbox consists of open-source solvers for a variety of optimization
@@ -33,44 +34,44 @@ integer nonlinear optimization.
 
 Features
 ---------
-* linprog: Solves a linear optimization problem.
+* fot_linprog: Solves a linear optimization problem.
  	
-* intlinprog: Solves a mixed-integer linear optimization problem in intlinprog
+* fot_intlinprog: Solves a mixed-integer linear optimization problem in intlinprog
 format with CBC.
   
-* quadprog: Solves a quadratic optimization problem.
+* fot_quadprog: Solves a quadratic optimization problem.
   
-* quadprogmat: Solves a quadratic optimization problem (with input in Matlab
+* fot_quadprogmat: Solves a quadratic optimization problem (with input in Matlab
   format).
   
-* quadprogCLP: Solves a quadratic optimization problem.
+* fot_quadprogCLP: Solves a quadratic optimization problem.
 
-* intquadprog: Solves an integer quadratic optimization problem.
+* fot_intquadprog: Solves an integer quadratic optimization problem.
 
-* lsqnonneg: Solves a nonnegative linear least squares optimization problem.
+* fot_lsqnonneg: Solves a nonnegative linear least squares optimization problem.
   
-* lsqlin: Solves a linear least squares optimization problem.
+* fot_lsqlin: Solves a linear least squares optimization problem.
   
-* lsqnonlin: Solves a nonlinear least squares optimization problem.
+* fot_lsqnonlin: Solves a nonlinear least squares optimization problem.
   
-* fminunc: Solves an unconstrained optimization problem.
+* fot_fminunc: Solves an unconstrained optimization problem.
   
-* fminbnd: Solves a nonlinear optimization problem on bounded variables.
+* fot_fminbnd: Solves a nonlinear optimization problem on bounded variables.
  
-* fmincon: Solves a general nonlinear optimization problem.
+* fot_fmincon: Solves a general nonlinear optimization problem.
   
-* fgoalattain: Solves a multiobjective goal attainment problem.
+* fot_fgoalattain: Solves a multiobjective goal attainment problem.
   
-* fminimax: Solves a minimax optimization problem.
+* fot_fminimax: Solves a minimax optimization problem.
   
-* intfminunc: Solves an unconstrained mixed-integer nonlinear optimization
+* fot_intfminunc: Solves an unconstrained mixed-integer nonlinear optimization
   problem.
   
-* intfminbnd: Solves a mixed-integer nonlinear optimization
+* fot_intfminbnd: Solves a mixed-integer nonlinear optimization
   problem on bounded variables.
   
-* intfmincon: Solves a constrained mixed-integer nonlinear optimization
+* fot_intfmincon: Solves a constrained mixed-integer nonlinear optimization
 problem.
   
-* intfminimax: Solves a mixed-integer minimax optimization problem.
+* fot_intfminimax: Solves a mixed-integer minimax optimization problem.
   
