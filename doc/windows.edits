@@ -1,0 +1,20 @@
+On windows, after building the toolbox, executing the loader.sce file will fail. This is because the dll files have to be linked during load and in a particular order. After running the builder.sce file, in the sci_gateway/cpp/loader.sce file add the following lines replacing all of the existing link() commands with
+
+[a, opt] = getversion();
+Version = opt(2);
+ilib_verbose(0);
+lib_path = root_tlbx + "\thirdparty\windows\bin\" + Version;
+   link(lib_path+filesep()+"libCoinUtils-0.dll");
+	 link(lib_path+filesep()+"libClp-0.dll");
+	 link(lib_path+filesep()+"libOsi-0.dll");
+	 link(lib_path+filesep()+"libOsiClp-0.dll");
+	 link(lib_path+filesep()+"libCgl-0.dll");
+	 link(lib_path+filesep()+"libCbc-0.dll");
+	 link(lib_path+filesep()+"libCbcSolver-0.dll");
+	 link(lib_path+filesep()+"libblas.dll");
+   link(lib_path+filesep()+"liblapack.dll");
+	 link(lib_path+filesep()+"libcoinmumps-0.dll");
+	 link(lib_path+filesep()+"libipopt-3.dll");
+	 link(lib_path+filesep()+"libbonmin-0.dll");
+
+

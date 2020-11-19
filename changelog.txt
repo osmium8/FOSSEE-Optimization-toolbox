@@ -1,5 +1,11 @@
 Changelog
 ---------
+Version 0.4 (November 19, 2020)
+	The Optimization libraies and the toolbox is now completely built using opensource MinGW compiler on Windows
+	All functions are now prefixed with "fot_". For example, "fmincon" function is now renamed as "fot_fmincon"
+	Computation time for "fot_fmincon" function has been improved
+	"Option" argument introduced in the "fot_fmincon" function
+
 Version 0.3.1 (March 31, 2020)
   Problems with fmincon evident in version 0.3 have been fixed
   Exit flag status for IPOPT and BONMIN libraries have been changed
