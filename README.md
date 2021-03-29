@@ -22,7 +22,7 @@ NOTE: On linux systems with gfortran8 as the default version, the user will need
 ## To build from source
 1. The source code has the `thirdparty` folder missing. This folder contains the pre-built optimization libraries for windows and linux
 2. Download the `thirdparty` folder for your OS from https://scilab.in/fossee-scilab-toolbox/optimization-toolbox/download-pre-built-optimization-library and paste it in the toolbox directory
-3. Then type `exec builder.sce` in the scilab console to run the builder. {Prerequisites: In windows you need MinGW installed along with its toolbox. See https://atoms.scilab.org/toolboxes/mingw/8.3.0 and Step 0,1,2 of https://github.com/FOSSEE/FOSSEE-Optimization-toolbox/blob/Scilab-6/doc/INSTALL.mingw}
+3. Then type `exec builder.sce` in the scilab console to run the builder. {Prerequisites: In windows you need MinGW installed along with its toolbox. See https://atoms.scilab.org/toolboxes/mingw/8.3.0 and Step 0,1,2 of https://github.com/FOSSEE/FOSSEE-Optimization-toolbox/blob/Scilab-6/doc/INSTALL.mingw }
 4. If you are using Windows, after you build the toolbox successfully, follow instructions given in https://github.com/FOSSEE/FOSSEE-Optimization-toolbox/blob/Scilab-6/doc/windows.edits
 5. Now run `exec loader.sce` in the scilab console. The toolbox will be ready
    to use.
