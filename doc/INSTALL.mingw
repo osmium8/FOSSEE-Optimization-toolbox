@@ -60,7 +60,7 @@ git, etc.)
     updates are received. Close the terminal after each update.
 
 2.5 Now add new packages. Open MINGW64 terminal (not others) and do
-    pacman -S git gcc gcc-fortran cmake pkgconfig wget autoconf make perl tar patch patchutils quilt
+    pacman -S git gcc gcc-fortran cmake pkg-config wget autoconf make perl tar patch patchutils quilt
 
 Step-3: Compiling Coin-OR Libraries
 ------------------------------------------------------------------------------
