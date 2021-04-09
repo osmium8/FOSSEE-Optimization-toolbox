@@ -1,0 +1,7 @@
+language: scilab
+# dist: bionic
+before_install:
+ - sudo apt-get install scilab
+
+script:
+ - scilab -nwni -f tests/unit_tests/fot_fmincon.tst
