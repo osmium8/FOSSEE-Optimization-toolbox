@@ -71,10 +71,11 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fot_fmincon (vara
 	//   <listitem>Syntax : options= struct("MaxIter", [---], "CpuTime", [---], "GradObj", ---, "Hessian", ---, "GradCon", ---);</listitem>
 	//   <listitem>MaxIter : a Scalar, containing the Maximum Number of Iteration that the solver should take.</listitem>
 	//   <listitem>CpuTime : a Scalar, containing the Maximum amount of CPU Time that the solver should take.</listitem>
+	//   <listitem>HessianApproximation : a Scalar, containing the the hessian approximation type - 0 for exact and 1 for limited memory.</listitem>
 	//   <listitem>GradObj : a function, representing the gradient function of the Objective in Vector Form.</listitem>
 	//   <listitem>Hessian : a function, representing the hessian function of the Lagrange in Symmetric Matrix Form with Input parameters x, Objective factor and Lambda. Refer Example for definition of Lagrangian Hessian function.</listitem>
 	//   <listitem>GradCon : a function, representing the gradient of the Non-Linear Constraints (both Equality and Inequality) of the problem. It is declared in such a way that gradient of non-linear inequality constraints are defined first as a separate Matrix (cg of size m2 X n or as an empty), followed by gradient of non-linear equality constraints as a separate Matrix (ceqg of size m2 X n or as an empty) where m2 & m3 are number of non-linear inequality and equality constraints respectively.</listitem>
-	//   <listitem>Default Values : options = list("MaxIter", [3000], "CpuTime", [600]);</listitem>
+	//   <listitem>Default Values : options = list("MaxIter", [3000], "CpuTime", [600], "HessianApproximation",[0]);</listitem>
 	// </itemizedlist>
 	//
 	// The exitflag allows to know the status of the optimization which is given back by Ipopt.
@@ -279,6 +280,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fot_fmincon (vara
     		errmsg = msprintf(gettext("%s: Unexpected number of input arguments : %d provided while it should be 4,5,6,7,8,9,10"), "fot_fmincon", rhs);
     		error(errmsg)
    	end
+	param =struct(); 
 	if (rhs==5) then
         param=varargin(5);
         fot_Checktype("fot_fmincon", param, "options", 5, "st");
@@ -321,8 +323,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fot_fmincon (vara
    	//To check whether options has been entered by the user   
    	if ( rhs==10 ) then
       		param = varargin(10);
-       else
-      		param =struct(); 
+      		
     end
 
 	
@@ -583,7 +584,7 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fot_fmincon (vara
    fot_Checktype("fot_fmincon", param, "options", 10, "st");
 
    	//To set default values for options, if user doesn't enter options
-	options = list("MaxIter", [3000], "CpuTime", [600] );
+	options = list("MaxIter", [3000], "CpuTime", [600],"HessianApproximation", [0]);
 
 
 	//Flags to check whether Gradient is "ON"/"OFF" and Hessian is "ON"/"OFF" 
@@ -617,6 +618,13 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fot_fmincon (vara
           			else
           				options(4) = param.CpuTime;    //Setting the maximum CPU time as per user entry
           			end
+				case "hessianapproximation" then
+					if (type(param.HessianApproximation)~=1) then
+						errmsg = msprintf(gettext("%s: Value for Maximum Cpu-time should be a Constant"), "fot_fmincon");
+						error(errmsg);
+					else
+						options(6) = param.HessianApproximation;    //Setting the hessian approximation type as per user entry
+					end
         	case "gradobj" then
         			if (type(param.GradObj)==10) then
         				if (convstr(param.GradObj)=="off") then
