@@ -619,11 +619,11 @@ function [xopt,fopt,exitflag,output,lambda,gradient,hessian] = fot_fmincon (vara
           				options(4) = param.CpuTime;    //Setting the maximum CPU time as per user entry
           			end
 				case "hessianapproximation" then
-					if (type(param.HessianApproximation)~=1) then
-						errmsg = msprintf(gettext("%s: Value for Maximum Cpu-time should be a Constant"), "fot_fmincon");
-						error(errmsg);
-					else
+					if (param.HessianApproximation==1|param.HessianApproximation==0) then
 						options(6) = param.HessianApproximation;    //Setting the hessian approximation type as per user entry
+					else
+						errmsg = msprintf(gettext("%s: Value for Hessian Approximation should be either 0 or 1"), "fot_fmincon");
+						error(errmsg);
 					end
         	case "gradobj" then
         			if (type(param.GradObj)==10) then
