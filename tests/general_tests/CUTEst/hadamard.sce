@@ -1,31 +1,43 @@
 /*
-
 --------hadamard.mod----------
 
-param n := 8;
-set N := 1..n;
+For n=4 in scilab,
+ fval  = 
 
-var Q{N,N} := 1;
-var maxval >= 0, := 0;
-var QQT{i in N, j in N} = sum{k in N} (Q[k,i]*Q[k,j]);
+   1.0000295
+ output  = 
 
-minimize abs_val:
-	abs(maxval);
+  Iterations = 11
+  Cpu_Time = 59.708
+  Objective_Evaluation = 14
+  Dual_Infeasibility = 0.0000799
+  Message = "Optimal Solution Found"
+  
+  For same n in NEOS solver, 
+  fval = 1.0000000045464403e+00 (scaled and unscaled both)
+  
+For n=8 in scilab, 
+ fval  = 
 
-subject to ortho{i in N, j in N}:
-	QQT[i,j] - n = 0;
+   1.0000058
 
-subject to abs_min_val{i in N, j in N}:
-	maxval >= Q[i,j];
+ output  = 
 
-subject to abs_max_val{i in N, j in N}:
-	maxval >= -Q[i,j];
-
-subject to ones{i in N,j in N}:
-	abs(Q[i,j]) <= 1;
+  Iterations = 12
+  Cpu_Time = 1319.887
+  Objective_Evaluation = 39
+  Dual_Infeasibility = 0.0000091
+  Message = "Optimal Solution Found"
+For same n in NEOS solver, 
+  fval = 1.0000001504207570e+00 (scaled and unscaled both)
+For same n in gamsworld site list, fval = 1.00000000
+  
 */
+funcprot(0);
 
-n = 8;
+n=4;
+//n = 8;
+
 N = 1:n;
 Q = 1+zeros(n,n);
 QQT = zeros(n,n);
@@ -41,6 +53,7 @@ x = zeros(n^2+1,1);
 x(1,1)= maxval;
 x(2:(n^2+1),1) = 1;
 x0=x;
+
 lb = zeros(n^2+1);
 lb(1) = 0;
 lb(2:(n^2+1)) = -1;
@@ -52,13 +65,12 @@ ub(2:(n^2+1)) = 1;
 A1 = zeros(n^2, n^2+1); b1 = zeros(n^2,1);
 A2 = zeros(n^2, n^2+1); b2 = zeros(n^2,1);
 for j =2:(n^2+1)
-        A1(j-1,j) = 1;
-        A2(j-1,j) = -1;
+    A1(j-1,j) = 1;
+    A2(j-1,j) = -1;
 end
-for i = 1:(n^2)
-    A1(i,1) = -1;
-    A2(i,1) = -1;
-end
+i = 1:(n^2);
+A1(i,1) = -1;
+A2(i,1) = -1;
 A = [A1;A2]; b=[b1;b2];
 
 
@@ -68,7 +80,9 @@ function y=f(x)
 endfunction
 
 function g=fGrad(x)
-      g = zeros(n^2+1,1);
+    n=4;
+    //n=8;
+      g = zeros(1,n^2+1);
      if maxval>=0
           g(1,1) = 1;
      else
@@ -77,63 +91,60 @@ function g=fGrad(x)
 endfunction
 
 function [c,ceq]=nlc(x)
-n=8;
-ceq = zeros(n,n);
-N=1:n;
-k = 1:n;
-QQT = zeros(n,n);
-maxval = x(1);
-Q = matrix(x(2:(n^2+1)),n,n);
-for i=N
-    for j=N
-        QQT(i,j) = sum(Q(k,i).*Q(k,j));
+    n=4;
+    //n=8;
+    ceq = zeros(n,n);
+    N=1:n;
+    k = 1:n;
+    QQT = zeros(n,n);
+    maxval = x(1);
+    Q = matrix(x(2:(n^2+1)),n,n);
+    for i=N
+        for j=N
+            QQT(i,j) = sum(Q(k,i).*Q(k,j));
+        end
     end
-end
+    
+    i=1:n;
+    j=1:n;
+    ceq(i, j) = QQT(i,j) - n;
 
-for i=1:n
-    for j=1:n
-        ceq(i, j) = QQT(i,j) - n;
-    end 
-end
-ceq = matrix(ceq, 1, n^2);
-c=[];
+    ceq = matrix(ceq, 1, n^2);
+    c=[];
 endfunction
 
 function [gc, gceq]=cGrad(x)
-n=8;
-ceq = zeros(n,n);
-QQT = zeros(n,n);
-N=1:n;
-k = 1:n;
-
-maxval = x(1);
-Q = matrix(x(2:(n^2+1)),n,n);
+    n=4;
+    //n=8;
+    ceq = zeros(n,n);
+    QQT = zeros(n,n);
+    N=1:n;
+    k = 1:n;
+    
+    maxval = x(1);
+    Q = matrix(x(2:(n^2+1)),n,n);
 
     gc = [];
+    //n^2 constraint equations and n^2+1 variables
     gceq = zeros(n^2, n^2+1);
     Qgrad = zeros(n,n);
     
     for i=1:n
         for j=1:n
                 Qgrad = zeros(n,n);
-                
-                for k=1:n
-                    Qgrad(k, i) = Qgrad(k, i)+ Q(k, j);
-                end 
-                for k=1:n
-                    Qgrad(k, j) = Qgrad(k, j)+ Q(k, i);
-                end
+                k=1:n;
+                Qgrad(k, i) = Qgrad(k, i)+ Q(k, j);
+                Qgrad(k, j) = Qgrad(k, j)+ Q(k, i);
                 
                 k=1:(n^2);
                 Qgradtemp = matrix(Qgrad,n^2,1);
                 gceq( i+(j-1)*(n), 1) = 0;
                 gceq(i+(j-1)*(n), k+1) = Qgradtemp(k, 1); 
-                      
         end 
     end
 endfunction
 
 //Options
-options=struct("MaxIter", [150000], "CpuTime", [50000], "GradObj", fGrad, "Hessian", "off","GradCon", cGrad,"HessianApproximation", [1]);
+options=struct("MaxIter", [150000], "CpuTime", [50000], "GradObj", fGrad, "Hessian", "off","GradCon", cGrad,"HessianApproximation", [0]);
 //Calling Ipopt
 [x,fval,exitflag,output] =fot_fmincon(f, x0,A,b,[],[],lb,ub,nlc,options)
