@@ -18,18 +18,33 @@ for n=5;t0=0;tf=1000;
   Dual_Infeasibility = 9.207D-14
   Message = "Optimal Solution Found"
   
+  When Hessian approximation is turned off and hessian is provided:
+   fval  = 1.2444444
+ output  = 
+
+  Iterations = 19
+  Cpu_Time = 0.095
+  Objective_Evaluation = 20
+  Dual_Infeasibility = 0.0000006
+  Message = "Optimal Solution Found"
+  
 for same n and other values, the objective given by ampl(minos): 1.244444444
     
     result obtained from NEOS server for same n and other parameters:
         objective = 1.2444444444444447e+00 (scaled and unscaled both)
-    end
+    
+    
+    
+for n=2000, t0 =0, tf=1000
+    from NEOS server
+objecive =    1.1160008156948149e+00 (both scaled and unscaled)
+however on gamsworld site, bestknown objective is 14.98048932
 */
 funcprot(0);
 
 
 //n = 2000;
 n =5;
-//tf = 1000.0;
 tf=1000;
 
 t0 = 0.0;
@@ -94,14 +109,13 @@ function y=f(x)
     //n = 2000;
     n =5;
     t0 = 0.0;
-    //tf = 1000.0;
     tf=1000;
     k = (tf-t0)/n;
     xu = matrix(x( (6*(n+1)+1): (9*(n+1)) ), 3, n+1);
     
     y=0;
-    i=1:3;
-    for t = 2:(n+1)
+    t = 2:(n+1);
+    for i=1:3
         y = y + sum(sum( (k/2).* (xu(i,t).^2 + xu(i,t-1).^2) ) );
     end
 endfunction
@@ -110,23 +124,36 @@ function g=fGrad(x)
     //n = 2000;
     n =5;
     t0 = 0.0;
-    //tf = 1000.0;
     tf=1000;
     k = (tf-t0)/n;
-    xu = matrix( x((6*(n+1)+1): (9*(n+1)) ), 3, n+1);
+    xu =x((6*(n+1)+1): (9*(n+1)) );
+    xu = matrix( xu, 3, n+1);
     gxu = zeros(3, n+1);
     t=2:n;
     for i=1:3
-        gxu(i,t) = 2*k.*( (xu(i,t)) );
-        gxu(i,1) =  k.*( (xu(i,1)) );
-        gxu(i,n+1) =  k.*( (xu(i,n+1)) );
+        gxu(i,t) = 2*k.*( xu(i,t) );
+        gxu(i,1) =  k.*( xu(i,1) );
+        gxu(i,n+1) = k.*( xu(i,n+1) );
     end
-    gxu = matrix(gxu,3*(n+1), 1 );
-    gxy = zeros(6*(n+1), 1);
-    g = [gxy;gxu];
-    
+    gxu = matrix(gxu,1, 3*(n+1) );
+    gxy = zeros(1, 6*(n+1));
+    g = [gxy,gxu];
 endfunction
 
-options = struct("MaxIter", [10000], "CpuTime", [6000], "GradObj", fGrad, "Hessian","off","GradCon","off","HessianApproximation",[1]);
+function y = lHess(x,obj,lambda)
+    n =5;
+    t0 = 0.0;
+    tf=1000;
+    k = (tf-t0)/n;
+    //Hessian of objective
+    H = zeros(9*(n+1),9*(n+1));
+    for i = (6*(n+1)+1): (9*(n+1))
+        H(i,i) = 2*k;
+    end
+    H(6*(n+1),6*(n+1)) = k; H(9*(n+1),9*(n+1)) = k;
+    y = obj*H;
+endfunction
+
+options = struct("MaxIter", [10000], "CpuTime", [6000], "GradObj",fGrad, "Hessian",lHess,"GradCon","off","HessianApproximation",[0]);
 [x,fval,exitflag,output] =fot_fmincon(f, x0,[],[],Aeq,beq,lb,ub,[],options)
 
