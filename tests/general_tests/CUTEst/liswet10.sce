@@ -1,12 +1,33 @@
-//-------liswets10.mod-------
 /*
+# AMPL Model by Hande Y. Benson
+#
+# Copyright (C) 2001 Princeton University
+# All Rights Reserved
+#
+# Permission to use, copy, modify, and distribute this software and
+# its documentation for any purpose and without fee is hereby
+# granted, provided that the above copyright notice appear in all
+# copies and that the copyright notice and this
+# permission notice appear in all supporting documentation.                     
+
+#   Source:
+#   W. Li and J. Swetits,
+#   "A Newton method for convex regression, data smoothing and
+#   quadratic programming with bounded constraints",
+#   SIAM J. Optimization 3 (3) pp 466-488, 1993.
+
+#   SIF input: Nick Gould, August 1994.
+
+#   classification QLR2-AN-V-V
+*/
+
+/*
+-------test case outputs-------
 For N=1000, it took almost 1.5 minutes to compute in scilab
 CPU time: 79.354000
 fval = 4.9316211
 For same N, on NEOS server:
 fval = 4.93113
-
-For N=10000, scilab crashes
 */
 
 funcprot(0);

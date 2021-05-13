@@ -1,5 +1,27 @@
 /*
---------hager4.mod-----------
+# AMPL Model by Hande Y. Benson
+#
+# Copyright (C) 2001 Princeton University
+# All Rights Reserved
+#
+# Permission to use, copy, modify, and distribute this software and
+# its documentation for any purpose and without fee is hereby
+# granted, provided that the above copyright notice appear in all
+# copies and that the copyright notice and this
+# permission notice appear in all supporting documentation.                     
+
+#   Source: problem P4 in
+#   W.W. Hager,
+#   "Multiplier Methods for Nonlinear Optimal Control",
+#   SIAM J. on Numercal Analysis 27(4): 1061-1080, 1990.
+
+#   SIF input: Ph. Toint, April 1991.
+
+#   classification OLR2-AN-V-V
+*/
+
+/*
+--------test case output-----------
 For N=500, in scilab
 CPU time: 11.074000
 fval = 2.7945138

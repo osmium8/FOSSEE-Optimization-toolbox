@@ -1,5 +1,29 @@
-//----------ubh1.mod-----------
 /*
+# AMPL Model by Hande Y. Benson
+#
+# Copyright (C) 2001 Princeton University
+# All Rights Reserved
+#
+# Permission to use, copy, modify, and distribute this software and
+# its documentation for any purpose and without fee is hereby
+# granted, provided that the above copyright notice appear in all
+# copies and that the copyright notice and this
+# permission notice appear in all supporting documentation.                     
+
+#   Source: unscaled problem 1 
+#   (ODE = 1, CLS = 1, GRD = 1, MET = T, SEED = 0.) in
+#   J.T. Betts and W.P. Huffman,
+#   "Sparse Nonlinear Programming Test Problems (Release 1.0)",
+#   Boeing Computer services, Seattle, July 1993.
+
+#   SIF input: Ph.L. Toint, October 1993.
+
+#   classification QLR2-MN-V-V
+*/
+
+/*
+----------test case outputs-----------
+
 for n=5;t0=0;tf=1000;
     with hessian approximation turned on, no fval was found
  output  = 

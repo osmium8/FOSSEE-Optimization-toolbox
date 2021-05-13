@@ -1,5 +1,24 @@
 /*
---------hadamard.mod----------
+# AMPL Model by Hande Y. Benson
+#
+# Copyright (C) 2001 Princeton University
+# All Rights Reserved
+#
+# Permission to use, copy, modify, and distribute this software and
+# its documentation for any purpose and without fee is hereby
+# granted, provided that the above copyright notice appear in all
+# copies and that the copyright notice and this
+# permission notice appear in all supporting documentation.                     
+
+#   Source:  A suggestion by Alan Edelman (MIT).
+
+#   SIF input: Nick Gould, Nov 1993.
+
+#   classification LQR2-RN-V-V
+*/
+
+/*
+--------test case outputs----------
 
 For n=4 in scilab,
  fval  = 

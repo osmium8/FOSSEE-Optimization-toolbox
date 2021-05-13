@@ -1,5 +1,27 @@
 /*
--------------sipow3.mod--------------
+# AMPL Model by Hande Y. Benson
+#
+# Copyright (C) 2001 Princeton University
+# All Rights Reserved
+#
+# Permission to use, copy, modify, and distribute this software and
+# its documentation for any purpose and without fee is hereby
+# granted, provided that the above copyright notice appear in all
+# copies and that the copyright notice and this
+# permission notice appear in all supporting documentation.                     
+
+#   Source: problem 3 in
+#   M. J. D. Powell,
+#   "Log barrier methods for semi-infinite programming calculations"
+#   Numerical Analysis Report DAMTP 1992/NA11, U. of Cambridge, UK.
+
+#   SIF input: A. R. Conn and Nick Gould, August 1993
+
+#   classification LLR2-AN-4-V
+*/
+
+/*
+-------------test case outputs--------------
 
 For M=100, in scilab
 CPU time: 0.168

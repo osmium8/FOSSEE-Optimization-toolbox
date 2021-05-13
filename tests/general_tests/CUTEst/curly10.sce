@@ -1,5 +1,24 @@
 /*
----------curly10.mod---------
+# AMPL Model by Hande Y. Benson
+#
+# Copyright (C) 2001 Princeton University
+# All Rights Reserved
+#
+# Permission to use, copy, modify, and distribute this software and
+# its documentation for any purpose and without fee is hereby
+# granted, provided that the above copyright notice appear in all
+# copies and that the copyright notice and this
+# permission notice appear in all supporting documentation.                     
+
+#   Source: Nick Gould
+
+#   SIF input: Nick Gould, September 1997.
+
+#   classification SUR2-AN-V-0
+*/
+
+/*
+---------test case output---------
 For N=100,K=1, in scilab
 CPU time: 14.156000
 fval = -10031.629
@@ -64,6 +83,6 @@ function g=fGrad(x)
     
 endfunction
 
-options = struct("MaxIter", [1000000], "CpuTime", [60000], "GradObj", fGrad, "Hessian","off","GradCon","off","HessianApproximation", 1 );
+options = struct("MaxIter", [1000000], "CpuTime", [60000], "GradObj", fGrad, "Hessian","off","GradCon","off","HessianApproximation", [1] );
 [x,fval,exitflag,output] =fot_fmincon(f, x0,[],[],[],[],[],[],[],options)
 
