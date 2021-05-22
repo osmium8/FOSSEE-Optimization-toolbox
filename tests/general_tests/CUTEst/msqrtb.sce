@@ -19,14 +19,29 @@
 #   SIF input: Ph. Toint, Dec 1989.
 
 #   classification NQR2-AN-V-V
+
+Translated to scilab from AMPL by Yasa Ali Rizvi as a part of FOSSEE internship, 2021
 */
 
 /*
 -------test case outputs----------
 //  Bestknown Objective = 0.00000000
 
+for P=3 in scilab,
+ fval  = 0.
+ output  = 
+
+  Iterations = 90
+  Cpu_Time = 0.404
+  Objective_Evaluation = 135
+  Dual_Infeasibility = 0
+  Message = "Optimal Solution Found"
+
+For same P, on NEOS server:
+objective = 0.0000000000000000e+00 (both scaled and unscaled)
 */
 P = 3;
+//P = 4;
 N = P^2;
 B = zeros(P,P);
 A = zeros(P,P);
@@ -55,6 +70,10 @@ function y=f(x)
 endfunction
 
 function [c, ceq]=nlc(x)
+    P = 3;
+    //P = 4;
+    N = P^2;
+
     c = [];
     ceq = [];
     x = (matrix(x,P,P))';
@@ -92,13 +111,20 @@ function [c, ceq]=nlc(x)
 endfunction
 
 function y=fGrad(x)
-    y(1,1:N) = 0;
+    P = 3;
+    //P = 4;
+    N = P^2;
+    y = zeros(1, N);
+    //y(1,1:N) = 0;
 endfunction
 
 function [cg, ceqg]=cGrad(x)
+    P = 3;
+    //P = 4;
+    N = P^2;
     cg=[];
     nc=1;
-
+    ceqg = zeros(nc, N);
     for i=1:P
         for j=1:P
             for t=1:P

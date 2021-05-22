@@ -20,19 +20,43 @@
 
 #   classification LLR2-AN-3-V
 
+Translated to scilab from AMPL by Yasa Ali Rizvi as a part of FOSSEE internship, 2021
 */
 
 /*
 -------test case outputs-------
-//	Bestknown Objective = 0.65395902; =0.649042(for M=500)
+//Bestknown Objective = 0.65395902; =0.649042(for M=500)
 //M=500 //fval = 0.6490421
-M = 350; //fval = 0.6490412
 
+M = 350; 
+ fval  = 0.6490412
+ output  = 
+
+  Iterations = 357
+  Cpu_Time = 1.428
+  Objective_Evaluation = 360
+  Dual_Infeasibility = 4.996D-16
+  Message = "Optimal Solution Found"
+   x  = 
+
+   0.0887912
+   0.4242669
+   1.0443497
+   
+For same M, NEOS Output:
+f = 0.649041
+
+x [*] :=
+1  0.0887835
+2  0.424298
+3  1.04433
 */
 
 x0 = zeros(3, 1);
 M = 350; 
 h = 1/M;
+
+//linear inequality constraint
 A = [];
 b = [];
 
@@ -48,6 +72,7 @@ function y=f(x)
 endfunction
 
 function y=fGrad(x)
+    M = 350; 
 	y = [1, 0.5, 1/3];
 endfunction
 

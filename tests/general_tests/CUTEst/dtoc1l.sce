@@ -11,6 +11,8 @@
 # permission notice appear in all supporting documentation.                     
 
 #   classification OLR2-AN-V-V
+
+Translated to scilab from AMPL by Sharvani Laxmi Somayaji as a part of FOSSEE internship, 2021
 */
 
 /*
@@ -20,15 +22,16 @@ CPU time: 0.112
 fval = 0.1126860
 For same values, on NEOS server:
 fval = 1.1268596668403760e-01
+
+For n= 6;nx=3;ny=3; 
+on AMPL(minos solver)
+f= 0.1554865896
 */
 
 funcprot(0);
 
 //n = 1000;nx = 5;ny = 10;
 n = 20; nx = 2; ny =4;
-
-//for n= 6;nx=3;ny=3; //fval by minos: 0.1554865896
-
 b = zeros(ny,nx);
 for i=1:ny
     for j=1:nx
@@ -38,8 +41,8 @@ end
 
 x0 = zeros((n-1)*nx+n*ny,1);
 
-//linear constraints
-//cons1
+//linear inequality constraints
+//constraint 1
 A1 = zeros(n-1, (n-1)*nx+n*ny);
 b1=zeros(n-1,1);
 i=1:nx;
@@ -54,7 +57,7 @@ for t=1:(n-1)
     A1xy = matrix(A1xy,1, (n)*ny);
     A1(t,1:((n-1)*nx+n*ny) ) = [A1xx,A1xy];
 end
-//cons2
+//constraint 2
 A2 = zeros((n-1)*(ny-2), (n-1)*nx+n*ny);
 b2=zeros((n-1)*(ny-2),1);
 i=1:nx;
@@ -73,7 +76,7 @@ for t=1:(n-1)
     end
 end
   
-//cons3
+//constraint 3
 A3 = zeros(n-1, (n-1)*nx+n*ny);
 b3=zeros(n-1,1);
 i=1:nx;
@@ -89,6 +92,7 @@ for t=1:(n-1)
     A3(t,1:((n-1)*nx+n*ny) ) = [A3xx,A3xy];
 end
 
+//constraint 4
 //Fixing a value:
 A4 = zeros(ny, (n-1)*nx+n*ny);
 b4=zeros(ny,1);

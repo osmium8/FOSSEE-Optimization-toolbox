@@ -21,6 +21,7 @@
 
 #   classification SUR2-AN-V-0
 
+Translated to scilab from AMPL by Sharvani Laxmi Somayaji and Pranshu Malhotra as a part of FOSSEE internship, 2021
 */
 
 /*
@@ -72,8 +73,9 @@ for same n in NEOS server, fval = 6.4394978143979227e+00(unscaled)
 f = 6.4395
 */
 
-//funcprot(0);
-N=1000;
+funcprot(0);
+//N=1000;
+N=100;
 M = N+1;
 
 x0 = zeros(1,N);
@@ -82,7 +84,8 @@ x0(1,i) = i;
 a = 10^-5;
 
 function y=f(x)
-    N=1000;
+    //N=1000;
+    N=100;
     M = N+1;
     a = 10^-5;
     j = 1:N;
@@ -93,7 +96,8 @@ function y=f(x)
 endfunction
 
 function g=fGrad(x)
-    N=1000;
+    //N=1000;
+    N=100;
     M = N+1;
     a = 10^-5;
     j = 1:N;

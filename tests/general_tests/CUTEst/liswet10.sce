@@ -19,20 +19,42 @@
 #   SIF input: Nick Gould, August 1994.
 
 #   classification QLR2-AN-V-V
+
+Translated to scilab from AMPL by Sharvani Laxmi Somayaji and Pranshu Malhotra as a part of FOSSEE internship, 2021
 */
 
 /*
 -------test case outputs-------
-For N=1000, it took almost 1.5 minutes to compute in scilab
-CPU time: 79.354000
-fval = 4.9316211
+    
+For N=10, in scilab
+fval  = 0.0219117
+ output  = 
+
+  Iterations = 27
+  Cpu_Time = 0.066
+  Objective_Evaluation = 37
+  Dual_Infeasibility = 1.110D-16
+  Message = "Optimal Solution Found"
+
 For same N, on NEOS server:
-fval = 4.93113
+objective = 2.1911074660776464e-02 (scaled and unscaled)
+
+For N=1000, in scilab
+fval  = 4.9316211
+ output  = 
+
+  Iterations = 31
+  Cpu_Time = 130.769
+  Objective_Evaluation = 32
+  Dual_Infeasibility = 1.043D-12
+  Message = "Optimal Solution Found"
+For same N, on NEOS server:
+objective = 4.9311300941879574e+00 (scaled and unscaled)
 */
 
 funcprot(0);
-//N = 10000;
-N=100; 
+//N = 1000;
+N=10; 
     
 K = 2;
 
@@ -49,6 +71,7 @@ C(i) = (-1).^(i-1).*B(K+1)./(B(i).*B(K+1-i+1));
 
 x0 = zeros(1,N+K);
 
+//linear inequality constraints
 j =1:N;
 i = 0:K;
 A = zeros(N,(N+K)); 
@@ -58,8 +81,8 @@ for j=1:N
 end
 
 function y=f(x)
-//N = 10000;
-    N=100;
+    //N = 1000;
+    N=10;
     
     K = 2;
     T = zeros(1,N+K);
@@ -74,8 +97,8 @@ function y=f(x)
 endfunction
 
 function g = fGrad(x)
-    //N = 10000;
-    N=100;
+    //N = 1000;
+    N=10;
     K = 2;
     T = zeros(1,N+K);
     i = 1:(N+K);

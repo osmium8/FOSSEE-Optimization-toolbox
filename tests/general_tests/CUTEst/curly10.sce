@@ -15,6 +15,8 @@
 #   SIF input: Nick Gould, September 1997.
 
 #   classification SUR2-AN-V-0
+
+Translated to scilab from AMPL by Sharvani Laxmi Somayaji as a part of FOSSEE internship, 2021
 */
 
 /*
@@ -27,8 +29,9 @@ fval = -1.0031629024133126e+04
 
 */
 
-
+funcprot(0);
 N = 100; K = 1;
+//N = 10; K = 1;
 //N=10000; K =10;
 
 xx = zeros(N,1);
@@ -40,6 +43,7 @@ x0(iterN) = 0.0001/(N+1);
 
 function y=f(x)
     N=100;K=1;
+    //N = 10; K = 1;
     //N=10000; K =10;
     
     Q = zeros(N,1);
@@ -57,6 +61,7 @@ endfunction
 
 function g=fGrad(x)
     N=100;K=1;
+    //N = 10; K = 1;
     //N=10000; K =10;
     
     Q = zeros(N,1);

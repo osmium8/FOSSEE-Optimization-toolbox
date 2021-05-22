@@ -18,6 +18,8 @@
 #   SIF input: A. R. Conn and Nick Gould, August 1993
 
 #   classification LLR2-AN-4-V
+
+Translated to scilab from AMPL by Sharvani Laxmi Somayaji as a part of FOSSEE internship, 2021
 */
 
 /*
@@ -44,7 +46,7 @@ fval = 5.3565076485080632e-01
 
 */
 
-//M=100;
+//M=1000;
 M=10000;
 STEP = 8/M;
 xi = zeros(M/2);
@@ -76,6 +78,8 @@ x_init = zeros(4, 1);
 x_init = [-0.1;0;0;1.2];
 x0 = x_init;
 
+//linear inequality constraints
+//Constraint 1
 j=1:(M/2);
 A1 = zeros(M/2, 4); b1=zeros(M/2,1);
 A1(j,1) = -1; 
@@ -83,6 +87,7 @@ A1(j,2) = -xi(j);
 A1(j,3) = -eta(j); 
 A1(j,4) = -1;
 b1(j) = -xi(j).^2.*eta(j);
+//Constraint 2
 A2 = zeros(M/2, 4); b2=zeros(M/2,1);
 A2(j,1) = 1; 
 A2(j,2) = xi(j); 

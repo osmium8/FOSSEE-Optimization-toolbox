@@ -18,21 +18,45 @@
 #   SIF input: Ph. Toint, April 1991.
 
 #   classification OLR2-AN-V-V
+
+Translated to scilab from AMPL by Sharvani Laxmi Somayaji as a part of FOSSEE internship, 2021
 */
 
 /*
---------test case output-----------
+--------test case outputs-----------
+For N=50, in scilab
+
+ fval  = 2.7998374
+output  = 
+
+  Iterations = 13
+  Cpu_Time = 0.061
+  Objective_Evaluation = 21
+  Dual_Infeasibility = 1.580D-09
+  Message = "Optimal Solution Found"
+
+For same N, on NEOS server:
+objective = 2.7998109577397630e+00
+
 For N=500, in scilab
-CPU time: 11.074000
-fval = 2.7945138
+fval  = 2.7945138
+output  = 
+
+  Iterations = 10
+  Cpu_Time = 8.621
+  Objective_Evaluation = 11
+  Dual_Infeasibility = 0.0000004
+  Message = "Optimal Solution Found"
+
 For same N, on NEOS server:
 fval = 2.7945134554215989e+00
 
 */
 
-n = 5000;
+//n = 5000;
 
-n=500;
+//n=500;
+n=50;
 
 h = 1/n;
 i=0:n;
@@ -55,6 +79,7 @@ x0 = zeros(1,(n+1+n));
 xx(1) = xx0;
 x0(1) = xx(1);
 
+//Linear equality constraints
 Aeq = zeros( n+1, 2*n+1 ); beq = zeros(n+1,1);
 Aeq(1,1) = 1; beq(1,1) = xx0;
 j = 2:(n+1);
@@ -64,13 +89,15 @@ for j = 2:(n+1)
     Aeq(j,n+j) = -exp(t(j));
 end
 
+//lower and upper bounds
 ub = zeros(1,2*n+1);
 ub(1,1:(2*n+1))=%inf;
 ub(1,(n+2):(2*n+1)) = 1;
     
 function y=f(x)
-    n = 5000;
-    n=500;
+    //n = 5000;
+    //n=500;
+    n=50;
     
     h = 1/n;
     i=0:n;
@@ -95,8 +122,10 @@ function y=f(x)
 endfunction
 
 function g = fGrad(x)
-    n = 5000;
-    n=500;
+    //n = 5000;
+    //n=500;
+    n=50;
+    
     //constants which don't need changing
     h = 1/n;
     i=0:n;
@@ -119,15 +148,12 @@ function g = fGrad(x)
     gu = zeros(n); i = 1:n;
     gu(i) = 2.*(xu(i)).*(0.5*h);
     gx = zeros(n+1); i = 2:n;
-    //gx(i) = 2.*xx(i).*((ai)-(bi)+(ci)) + 2.*xx(i).*((ci+1)) + xx(i-1).*((bi)-2.*(ci)) + xx(i+1).*((bi+1)-2.*(ci+1)) ;
     gx(i) = 2.*xx(i).*((scda.*z(i-1))-(scdb.*z(i-1))+(scdc.*z(i-1))) + 2.*xx(i).*((scdc.*z(i))) + xx(i-1).*((scdb.*z(i-1))-2.*(scdc.*z(i-1))) + xx(i+1).*((scdb.*z(i-1))-2.*(scdc.*z(i))) ;
     //for i=1
     i=1;
-    //gx(i) = 2.*xx(i).*((ci+1)) + xx(i+1).*((bi+1)-2.*(ci+1)) ;
     gx(i) = 2.*xx(i).*((scdc.*z(i))) + xx(i+1).*((scdb.*z(i))-2.*(scdc.*z(i))) ;
     //for i=n+1
     i = (n+1);
-    //gx(n+1) = 2.*xx(i).*((ai)-(bi)+(ci)) + xx(i-1).*((bi)-2.*(ci)) ;
     gx(n+1) = 2.*xx(i).*((scda.*z(i-1))-(scdb.*z(i-1))+(scdc.*z(i-1))) + xx(i-1).*((scdb.*z(i-1))-2.*(scdc.*z(i-1))) ;
     
     g = zeros(2*n+1,1);
@@ -135,7 +161,6 @@ function g = fGrad(x)
     g(i,1) = gx(i);
     i = 1:n;
     g((n+1+i),1) = gu(i);
-
 endfunction
 
 options = struct("MaxIter", [1000000], "CpuTime", [60000], "GradObj", fGrad, "Hessian","off","GradCon","off","HessianApproximation", 1 );

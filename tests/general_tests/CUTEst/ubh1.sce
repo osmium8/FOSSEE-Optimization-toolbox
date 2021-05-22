@@ -19,6 +19,8 @@
 #   SIF input: Ph.L. Toint, October 1993.
 
 #   classification QLR2-MN-V-V
+
+Translated to scilab from AMPL by Sharvani Laxmi Somayaji as a part of FOSSEE internship, 2021
 */
 
 /*
@@ -32,7 +34,7 @@ for n=5;t0=0;tf=1000;
   Cpu_Time = 8.157
   Message = "Restoration Failed!"
     
-    with hessian approximation turned off,  fval  = 1.2444444
+    with hessian approximation turned off and hessian is not provided,  fval  = 1.2444444
 
  output  = 
 
@@ -75,13 +77,13 @@ t0 = 0.0;
 k = (tf-t0)/n;
 x0 = zeros(1, 9*(n+1));
     
-//    Upper and lower bounds
+//Upper and lower bounds
 ub = %inf + zeros(1, 9*(n+1));
 lb = -%inf + zeros(1, 9*(n+1));
 ub(1, (6*(n+1)+1):9*(n+1)) = 1;
 lb(1, (6*(n+1)+1):9*(n+1)) = -1;
 
-//cons1
+//constraint 1
 Aeq1 = zeros(3*n, 9*(n+1));
 beq1 = zeros(3*n,1);
 for t=2:(n+1)
@@ -96,7 +98,7 @@ for t=2:(n+1)
     end
 end
 
-//cons2
+//constraint 2
 Aeq2 = zeros(3*n, 9*(n+1));
 beq2 = zeros(3*n,1);
 for t=2:(n+1)
@@ -110,7 +112,7 @@ for t=2:(n+1)
     end
 end
 
-//cons3
+//constraint 3
 //Fixing variables
 Aeq3 = zeros(12, 9*(n+1));
 beq3 = zeros(12,1);
@@ -180,4 +182,3 @@ endfunction
 
 options = struct("MaxIter", [10000], "CpuTime", [6000], "GradObj",fGrad, "Hessian",lHess,"GradCon","off","HessianApproximation",[0]);
 [x,fval,exitflag,output] =fot_fmincon(f, x0,[],[],Aeq,beq,lb,ub,[],options)
-

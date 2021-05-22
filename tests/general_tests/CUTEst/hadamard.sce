@@ -15,6 +15,8 @@
 #   SIF input: Nick Gould, Nov 1993.
 
 #   classification LQR2-RN-V-V
+
+Translated to scilab from AMPL by Sharvani Laxmi Somayaji as a part of FOSSEE internship, 2021
 */
 
 /*
@@ -73,6 +75,7 @@ x(1,1)= maxval;
 x(2:(n^2+1),1) = 1;
 x0=x;
 
+//Lower and Upper bounds
 lb = zeros(n^2+1);
 lb(1) = 0;
 lb(2:(n^2+1)) = -1;
@@ -81,7 +84,10 @@ ub = zeros(n^2+1);
 ub(1) = %inf;
 ub(2:(n^2+1)) = 1;
 
+//Linear Inequality constraints
+//constraint 1
 A1 = zeros(n^2, n^2+1); b1 = zeros(n^2,1);
+//constraint 2
 A2 = zeros(n^2, n^2+1); b2 = zeros(n^2,1);
 for j =2:(n^2+1)
     A1(j-1,j) = 1;
@@ -91,7 +97,6 @@ i = 1:(n^2);
 A1(i,1) = -1;
 A2(i,1) = -1;
 A = [A1;A2]; b=[b1;b2];
-
 
 function y=f(x)
      maxval = x(1);
