@@ -22,7 +22,16 @@ Translated to scilab from AMPL by Sharvani Laxmi Somayaji as a part of FOSSEE in
 /*
 --------test case outputs----------
 
-For n=4 in scilab,
+For n=4 in scilab, with hessianApproximation off (and passing hessian function)
+fval  = 1.0000295
+ output  = 
+
+  Iterations = 11
+  Cpu_Time = 0.148
+  Objective_Evaluation = 14
+  Dual_Infeasibility = 0.0000799
+  Message = "Optimal Solution Found"
+For n=4 in scilab, without passing hessian function and with hessianApproximation off
  fval  = 
 
    1.0000295
@@ -34,10 +43,10 @@ For n=4 in scilab,
   Dual_Infeasibility = 0.0000799
   Message = "Optimal Solution Found"
   
-  For same n in NEOS solver, 
-  fval = 1.0000000045464403e+00 (scaled and unscaled both)
+  For same n on NEOS server, 
+  objective = 1.0000000045464403e+00 (scaled and unscaled both)
   
-For n=8 in scilab, 
+For n=8 in scilab, without passing hessian function and with hessianApproximation off
  fval  = 
 
    1.0000058
@@ -49,8 +58,8 @@ For n=8 in scilab,
   Objective_Evaluation = 39
   Dual_Infeasibility = 0.0000091
   Message = "Optimal Solution Found"
-For same n in NEOS solver, 
-  fval = 1.0000001504207570e+00 (scaled and unscaled both)
+For same n on NEOS server, 
+  objective = 1.0000001504207570e+00 (scaled and unscaled both)
 For same n in gamsworld site list, fval = 1.00000000
   
 */
@@ -60,20 +69,10 @@ n=4;
 //n = 8;
 
 N = 1:n;
-Q = 1+zeros(n,n);
-QQT = zeros(n,n);
-k = 1:n;
-for i=1:n
-    for j=1:n
-        QQT(i,j) = sum(Q(k,i).*Q(k,j));
-    end
-end
-
 maxval = 0;
-x = zeros(n^2+1,1);
-x(1,1)= maxval;
-x(2:(n^2+1),1) = 1;
-x0=x;
+x0 = zeros(n^2+1,1);
+x0(1,1)= maxval;
+x0(2:(n^2+1),1) = 1;
 
 //Lower and Upper bounds
 lb = zeros(n^2+1);
@@ -120,19 +119,16 @@ function [c,ceq]=nlc(x)
     ceq = zeros(n,n);
     N=1:n;
     k = 1:n;
-    QQT = zeros(n,n);
-    maxval = x(1);
+    //QQT = zeros(n,n);
+    //maxval = x(1);
     Q = matrix(x(2:(n^2+1)),n,n);
     for i=N
         for j=N
-            QQT(i,j) = sum(Q(k,i).*Q(k,j));
+            //QQT(i,j) = sum(Q(k,i).*Q(k,j));
+            //ceq(i, j) = QQT(i,j) - n;
+            ceq(i, j) = sum(Q(k,i).*Q(k,j)) - n;
         end
     end
-    
-    i=1:n;
-    j=1:n;
-    ceq(i, j) = QQT(i,j) - n;
-
     ceq = matrix(ceq, 1, n^2);
     c=[];
 endfunction
@@ -156,19 +152,45 @@ function [gc, gceq]=cGrad(x)
     for i=1:n
         for j=1:n
                 Qgrad = zeros(n,n);
-                k=1:n;
-                Qgrad(k, i) = Qgrad(k, i)+ Q(k, j);
-                Qgrad(k, j) = Qgrad(k, j)+ Q(k, i);
-                
+                for k=1:n
+                    Qgrad(k, i) = Qgrad(k, i)+ Q(k, j);
+                end
+                for k =1:n
+                    Qgrad(k, j) = Qgrad(k, j)+ Q(k, i);
+                end
                 k=1:(n^2);
                 Qgradtemp = matrix(Qgrad,n^2,1);
                 gceq( i+(j-1)*(n), 1) = 0;
-                gceq(i+(j-1)*(n), k+1) = Qgradtemp(k, 1); 
+                gceq(i+(j-1)*(n), k+1) = (Qgradtemp(k, 1))'; 
         end 
     end
 endfunction
 
+function y = lHess(x,obj,lambda)
+    n=4;
+    //n=8;
+    
+    //Hessian of objective
+    //H = 0;
+    //Hessian of nonlinear equality constraint
+    //n^2 constraint equations and n^2+1 variables
+    Hct = zeros(n^2+1, n^2+1);
+    for i=1:n
+        for j=1:n
+                Qggrad = zeros( n^2+1, n^2+1);
+                for k=1:n
+                    Qggrad(1+k+(j-1)*n, 1+k+(i-1)*n) = Qggrad(1+k+(j-1)*n, 1+k+(i-1)*n) +1;
+                end
+                for k=1:n
+                    Qggrad(1+k+(i-1)*n, 1+k+(j-1)*n) = Qggrad(1+k+(i-1)*n,1+ k+(j-1)*n) +1; 
+                end
+                Hct = Hct + lambda(i+(j-1)*n)*Qggrad;
+        end 
+    end
+    y = Hct;
+endfunction
+
 //Options
-options=struct("MaxIter", [150000], "CpuTime", [50000], "GradObj", fGrad, "Hessian", "off","GradCon", cGrad,"HessianApproximation", [0]);
+options=struct("MaxIter", [150000], "CpuTime", [50000], "GradObj", fGrad, "Hessian",lHess ,"GradCon", cGrad,"HessianApproximation", [0]);
 //Calling Ipopt
 [x,fval,exitflag,output] =fot_fmincon(f, x0,A,b,[],[],lb,ub,nlc,options)

@@ -26,6 +26,8 @@ Translated to scilab from AMPL by Sharvani Laxmi Somayaji and Pranshu Malhotra a
 
 /*
 ---------test case outputs--------
+**Note that the outputs will depend on various factors such as solver, the problem type, tolerance etc**
+
 N=10; In scilab:
 fval = 0.0001305;
 Cpu_Time: 0.076

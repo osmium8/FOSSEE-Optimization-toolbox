@@ -106,5 +106,5 @@ function g = fGrad(x)
     g(4,1) = 1;
 endfunction
 
-options = struct("MaxIter", [1000000], "CpuTime", [600000], "GradObj", fGrad, "Hessian","off","GradCon","off","HessianApproximation", 1 );
+options = struct("MaxIter", [1000000], "CpuTime", [600000], "GradObj", fGrad, "Hessian","off","GradCon","off","HessianApproximation", [1] );
 [x,fval,exitflag,output] =fot_fmincon(f, x0,A,b,[],[],[],[],[],options)

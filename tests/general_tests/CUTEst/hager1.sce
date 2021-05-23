@@ -25,7 +25,7 @@ Translated to scilab from AMPL by Yasa Ali Rizvi as a part of FOSSEE internship,
 /*
 ------test case outputs---------
 
-//	Bestknown Objective = 1.31145470; =0.880797(for N=1000)
+//Bestknown Objective = 1.31145470; =0.880797(for N=1000)
 
 //N=500; //fval=   0.8807972
 //N=700; //fval=   0.8807971 
@@ -65,7 +65,9 @@ x0 = zeros(2*N+1, 1);
 //Linear equality constraints
 beq = zeros(N+1, 1);
 beq(1) = 1;
-Aeq = [1];
+//Aeq = [1];
+Aeq = ones(N+1,2*N+1);
+
 Aeq(1, 2:2*N+1) = 0;
 
 for i=2:N+1
@@ -95,7 +97,7 @@ endfunction
 function y=fGrad(x)
     //N = 1000;
     N=100;
-    y = zeros(1,N);
+    y = zeros(1,2*N+1);
 	y(1,1:N) = 0;
 	y(1,N+1) = x(N+1);
 	for i=1:N
