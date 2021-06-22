@@ -176,8 +176,8 @@ intcon = [2 ,4];
 <para>
 <latex>
 \begin{eqnarray}
-\&amp;x_{2} + x_{4}+ 2x_{5} - x_{6}&amp;\leq -1\\ 
-\&amp;-x_{1} + 2x_{3} + x_{4} + x_{5}&amp;\leq 2.5\\ 
+&amp;x_{2} + x_{4}+ 2x_{5} - x_{6}&amp;\leq -1\\ 
+&amp;-x_{1} + 2x_{3} + x_{4} + x_{5}&amp;\leq 2.5\\ 
 \end{eqnarray}
 </latex>
    </para>
@@ -314,7 +314,6 @@ Infeasible Problems: Find x in R^6 such that it minimizes the objective function
 <para>
 <latex>
 \begin{eqnarray}
-begin{eqnarray}
 \hspace{70pt} &amp;x_{2} + x_{4}+ 2x_{5} - x_{6}&amp;\leq -1\\ 
 \hspace{70pt} &amp;-x_{1} + 2x_{3} + x_{4} + x_{5}&amp;\leq 2.5\\ 
 \hspace{70pt} &amp;x_{2} + x_{4}+ 2x_{5} - x_{6}&amp;= 4 \\
@@ -327,7 +326,7 @@ begin{eqnarray}
 \end{array}
 \end{eqnarray}
 </latex>
-   </para>
+</para>
 <para>
 </para>
 <programlisting role="example"><![CDATA[
@@ -372,7 +371,7 @@ F &amp;=
 \hspace{70pt} &amp;-x_{1} + 2x_{3} + x_{4} + x_{5}&amp;\leq 2.5\\ 
 \hspace{70pt} &amp;x_{1} - x_{2} + x_{3} + 3x_{5} + x_{6}&amp;= 1 \\
 \hspace{70pt} &amp;-x_{1} + 2x_{3}+ x_{4} + x_{5}&amp;= 2\\
-\\ \end{eqnarray}
+\end{eqnarray}
 </latex>
    </para>
 <para>

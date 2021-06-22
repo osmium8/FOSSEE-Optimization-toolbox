@@ -330,10 +330,8 @@ ceq = [];
 cg=[2*x(1) , -2*x(2) , 2*x(3) ; 2*x(1) , 2*x(2) , 2*x(3)];
 cgeq=[];
 endfunction
-//Options
-options=list("MaxIter", [1500], "CpuTime", [500], "GradObj", "on","GradCon", "on");
 //Calling Ipopt
-[x,fval,exitflag,output] =fot_intfmincon(f, x0,intcon,A,b,Aeq,beq,lb,ub,nlc,options)
+[x,fval,exitflag,output] =fot_intfmincon(f, x0,intcon,A,b,Aeq,beq,lb,ub,nlc)
 // Press ENTER to continue
 
    ]]></programlisting>
